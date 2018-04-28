@@ -2,3 +2,4 @@ node_modules/
 tmp/
 *.sublime-workspace
 config.json
+*.lock
