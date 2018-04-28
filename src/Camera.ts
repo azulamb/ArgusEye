@@ -1,10 +1,9 @@
+import { Exec } from './Common';
+
 export class Camera
 {
 	public capture( file: string )
 	{
-		return new Promise( ( resolve, reject ) =>
-		{
-resolve( true );
-		} );
+		return Exec( 'fswebcam ' + file );
 	}
 }
