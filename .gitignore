@@ -3,4 +3,4 @@ tmp/
 dest/
 *.sublime-workspace
 config.json
-*.lock
+package-lock.json
