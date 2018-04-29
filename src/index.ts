@@ -174,12 +174,13 @@ console.log( data );
 	} ).then( ( movie ) =>
 	{
 		if ( !movie ) { return Promise.resolve( '' ); }
+		const tweet = [ data.year, data.month, data.day ].join( '/' ) + ' ' + [ data.hours, data.minutes ].join( ':' );
 		return LoadConfig().then( ( config ) =>
 		{
 			return TwitterMediaUpload(
 				config.consumer.token, config.consumer.secret,
 				config.access.token, config.access.secret,
-				'test', movie );
+				tweet, movie );
 			/*return LoadBinary( movie ).then( ( data ) =>
 			{
 				return TwitterMediaUpload(
