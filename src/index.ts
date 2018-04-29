@@ -166,6 +166,7 @@ console.log( data );
 	}
 	return LoadPicList( dir ).then( ( files ) =>
 	{
+		console.log( files );
 		const movie = new Movie();
 		return movie.create( files );
 	} ).then( () =>
