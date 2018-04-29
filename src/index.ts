@@ -76,7 +76,7 @@ function LoadPicList( dir: string )
 			return Promise.all( p ).then( ( filelists ) =>
 			{
 				filelists.forEach( ( indir ) => { files.push( ...indir ); } );
-				return files;
+				return resolve( files );
 			} );
 		} );
 	} );
