@@ -4,6 +4,6 @@ export class Camera
 {
 	public capture( file: string )
 	{
-		return Exec( 'fswebcam ' + file );
+		return Exec( 'fswebcam --no-banner ' + file );
 	}
 }
