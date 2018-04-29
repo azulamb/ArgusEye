@@ -5,6 +5,7 @@ export class Movie
 
 	public create( files: string[] )
 	{
+		if ( files.length <= 0 ) { return Promise.resolve( {} ); }
 		return Exec( 'rm -rf ~/tmp_mv/' ).then( () =>
 		{
 			return Exec( 'mkdir ~/tmp_mv/' );
