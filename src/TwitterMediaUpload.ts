@@ -11,6 +11,8 @@ export function TwitterMediaUpload( consumer_key: string, consumer_secret: strin
 		access_token_secret:  access_token_secret,
 	} );
 
+	console.log( consumer_key, consumer_secret, access_token_key, access_token_secret, tweet, movie );
+
 	return new Promise( ( resolve, reject ) =>
 	{
 		T.postMediaChunked( { file_path: movie }, ( error: Error, data: any, response: any ) =>
