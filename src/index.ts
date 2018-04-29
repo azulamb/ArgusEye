@@ -58,7 +58,6 @@ function LoadPicList( dir: string )
 	{
 		fs.readdir( dir, ( error, list ) =>
 		{
-			console.log( error, list );
 			if ( error ) { return resolve( [] ); }
 
 			const files: string[] = [];
@@ -67,6 +66,7 @@ function LoadPicList( dir: string )
 			list.forEach( ( item ) =>
 			{
 				const fpath = path.join( dir, item );
+				console.log( item, fpath );
 				const stat = fs.statSync( fpath );
 				if ( !stat ) { return; }
 				if ( stat.isFile() && fpath.match( /\.jpg$/ ) ) { return files.push( fpath ); }
@@ -188,4 +188,4 @@ console.log( data );
 	{
 		console.log( 'complete' );
 	} );
-} ).catch( ( error ) => { console.log( error ); } );
+} ).catch( ( error ) => { console.log( 'Error:', error ); } );
