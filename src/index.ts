@@ -171,12 +171,12 @@ console.log( data );
 		console.log( files );
 		const movie = new Movie();
 		return movie.create( files );
-	} ).then( () =>
+	} ).then( ( movie ) =>
 	{
+		if ( !movie ) { return Promise.resolve( '' ); }
 		return LoadConfig().then( ( config ) =>
 		{
-			const file = './test.mp4';
-			return LoadBinary( file ).then( ( data ) =>
+			return LoadBinary( movie ).then( ( data ) =>
 			{
 				return TwitterMediaUpload(
 					config.consumer.token, config.consumer.secret,

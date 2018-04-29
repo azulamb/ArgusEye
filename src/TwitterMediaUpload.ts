@@ -3,6 +3,7 @@ const Twitter = require('twitter');
 
 export function TwitterMediaUpload( consumer_key: string, consumer_secret: string, access_token_key: string, access_token_secret: string, tweet: string, data: Buffer )
 {
+	console.log( 'Twitter upload.' );
 	const client = new Twitter(
 	{
 		consumer_key: consumer_key,
@@ -17,6 +18,7 @@ export function TwitterMediaUpload( consumer_key: string, consumer_secret: strin
 	{
 		client.post('media/upload', { media: data }, ( error: Error, media: { media_id_string: string }, response: any ) =>
 		{
+console.log( error );
 			if ( error ) { return reject( error ); }
 
 console.log(media);

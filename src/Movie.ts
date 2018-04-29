@@ -6,7 +6,7 @@ export class Movie
 	public create( files: string[] )
 	{
 		console.log( 'Create Movie.' );
-		if ( files.length <= 0 ) { return Promise.resolve( {} ); }
+		if ( files.length <= 0 ) { return Promise.resolve( '' ); }
 		return Exec( 'rm -rf ~/tmp_mv/' ).then( () =>
 		{
 			return Exec( 'mkdir ~/tmp_mv/' );
@@ -22,7 +22,11 @@ export class Movie
 			} );
 		} ).then( ( file ) =>
 		{
-			return Exec( 'ffmpeg -r 5 -i ~/tmp_mv/%04d.jpg ./movie_' + file );
+			const filepath = './movie_' + file;
+			return Exec( 'ffmpeg -r 5 -i ~/tmp_mv/%04d.jpg ' + filepath ).then( () =>
+			{
+				return filepath;
+			} );
 		} );
 	}
 }
