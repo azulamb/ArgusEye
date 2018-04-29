@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/HirokiMiyaoka/ArgusEye/issues"
   },
-  "homepage": "https://github.com/HirokiMiyaoka/ArgusEye#readme"
+  "homepage": "https://github.com/HirokiMiyaoka/ArgusEye#readme",
+  "dependencies": {
+    "twit": "^2.2.9"
+  }
 }

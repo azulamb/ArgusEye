@@ -176,13 +176,17 @@ console.log( data );
 		if ( !movie ) { return Promise.resolve( '' ); }
 		return LoadConfig().then( ( config ) =>
 		{
-			return LoadBinary( movie ).then( ( data ) =>
+			return TwitterMediaUpload(
+				config.consumer.token, config.consumer.secret,
+				config.access.token, config.access.secret,
+				'test', movie );
+			/*return LoadBinary( movie ).then( ( data ) =>
 			{
 				return TwitterMediaUpload(
 					config.consumer.token, config.consumer.secret,
 					config.access.token, config.access.secret,
 					'test', data );
-			} );
+			} );*/
 		} )
 	} ).then( () =>
 	{

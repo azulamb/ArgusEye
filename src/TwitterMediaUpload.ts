@@ -1,5 +1,44 @@
+const fs = require('fs');
+const Twit = require('Twit'); // npm install twit
+
+export function TwitterMediaUpload( consumer_key: string, consumer_secret: string, access_token_key: string, access_token_secret: string, tweet: string, movie: string )
+{
+	const T = new Twit(
+	{
+		consumer_key:         consumer_key,
+		consumer_secret:      consumer_secret,
+		access_token:         access_token_key,
+		access_token_secret:  access_token_secret,
+	} );
+
+	return new Promise( ( resolve, reject ) =>
+	{
+		T.postMediaChunked( { file_path: movie }, ( error: Error, data: any, response: any ) =>
+		{
+
+			const mediaIdStr = data.media_id_string;
+			const meta_params = { media_id: mediaIdStr };
+
+			T.post( 'media/metadata/create', meta_params, ( error: Error, data: any, response: any ) =>
+			{
+				if ( !error )
+				{
+
+					const params = { status: tweet, media_ids: [mediaIdStr] };
+
+					T.post( 'statuses/update', params, ( error: Error, tweet: any, response: any ) =>
+					{
+						console.log(tweet);
+						resolve( tweet.id_str );
+					} );
+				}
+			} );
+		} );
+	} );
+}
+
 //import * as twitter from 'twitter';
-const Twitter = require('twitter');
+/*const Twitter = require('twitter');
 
 export function TwitterMediaUpload( consumer_key: string, consumer_secret: string, access_token_key: string, access_token_secret: string, tweet: string, data: Buffer )
 {
@@ -42,4 +81,4 @@ console.log( response );
 	{
 		return 'OK';
 	} );
-}
+}*/
