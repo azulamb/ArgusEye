@@ -15,23 +15,24 @@ export function TwitterMediaUpload( consumer_key: string, consumer_secret: strin
 	{
 		T.postMediaChunked( { file_path: movie }, ( error: Error, data: any, response: any ) =>
 		{
+console.log( data );
+			if ( error ) { return reject( error ); }
 
 			const mediaIdStr = data.media_id_string;
 			const meta_params = { media_id: mediaIdStr };
 
 			T.post( 'media/metadata/create', meta_params, ( error: Error, data: any, response: any ) =>
 			{
-				if ( !error )
+console.log( data );
+				if ( error ) { return reject( error ); }
+
+				const params = { status: tweet, media_ids: [mediaIdStr] };
+
+				T.post( 'statuses/update', params, ( error: Error, tweet: any, response: any ) =>
 				{
-
-					const params = { status: tweet, media_ids: [mediaIdStr] };
-
-					T.post( 'statuses/update', params, ( error: Error, tweet: any, response: any ) =>
-					{
-						console.log(tweet);
-						resolve( tweet.id_str );
-					} );
-				}
+					console.log(tweet);
+					resolve( tweet.id_str );
+				} );
 			} );
 		} );
 	} );
