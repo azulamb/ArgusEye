@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Twit = require('Twit'); // npm install twit
+const Twit = require('twit');
 
 export function TwitterMediaUpload( consumer_key: string, consumer_secret: string, access_token_key: string, access_token_secret: string, tweet: string, movie: string )
 {
