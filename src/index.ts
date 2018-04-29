@@ -53,10 +53,12 @@ function LoadConfig()
 
 function LoadPicList( dir: string )
 {
+	console.log( dir );
 	return new Promise<string[]>( ( resolve, reject ) =>
 	{
 		fs.readdir( dir, ( error, list ) =>
 		{
+			console.log( error, list );
 			if ( error ) { return resolve( [] ); }
 
 			const files: string[] = [];
