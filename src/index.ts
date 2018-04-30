@@ -174,7 +174,8 @@ console.log( data );
 	} ).then( ( movie ) =>
 	{
 		if ( !movie ) { return Promise.resolve( '' ); }
-		const tweet = [ data.year, data.month, data.day ].join( '/' ) + ' ' + [ data.hours, data.minutes ].join( ':' );
+
+		const tweet = [ data.year, data.month, data.day ].join( '/' ) + ( data.create ? '' : ' ' + [ data.hours, data.minutes ].join( ':' ) );
 		return LoadConfig().then( ( config ) =>
 		{
 			return TwitterMediaUpload(
