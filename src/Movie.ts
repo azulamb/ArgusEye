@@ -23,7 +23,7 @@ export class Movie
 		} ).then( ( file ) =>
 		{
 			const filepath = './movies/' + file;
-			return Exec( 'ffmpeg -r 5 -i ~/tmp_mv/%04d.jpg -c:v h264_omx ' + filepath ).then( () =>
+			return Exec( 'ffmpeg -r 20 -i ~/tmp_mv/%04d.jpg -c:v h264_omx ' + filepath ).then( () =>
 			{
 				return filepath;
 			} );
