@@ -151,7 +151,8 @@ console.log( data );
 	if ( data.hours === 0 && data.minutes < 5 )
 	{
 		// Day
-		dir = path.join( data.dir, '..' );
+		const date = new Date( data.date.getTime() - 65 * 60 * 1000 );
+		dir = path.join( 'pics', [ date.getFullYear(), Z( date.getMonth() + 1 ), Z( date.getDate() ) ].join( '' ) );
 	} else
 	{
 		// Hour
