@@ -148,11 +148,13 @@ console.log( data );
 	if ( !data.create ) { return Promise.resolve(); }
 	// Mode ... day or 1h.
 	let dir = '';
+	let file = '';
 	if ( data.hours === 0 && data.minutes < 5 )
 	{
 		// Day
 		const date = new Date( data.date.getTime() - 65 * 60 * 1000 );
-		dir = path.join( 'pics', [ date.getFullYear(), Z( date.getMonth() + 1 ), Z( date.getDate() ) ].join( '' ) );
+		file = [ date.getFullYear(), Z( date.getMonth() + 1 ), Z( date.getDate() ) ].join( '' );
+		dir = path.join( 'pics', file );
 	} else
 	{
 		// Hour
@@ -160,18 +162,20 @@ console.log( data );
 		{
 			// Before 1hour.
 			dir = path.join( 'pics', [ data.year, Z( data.month ), Z( data.day ) ].join( '' ), Z( data.hours - 1 ) );
+			file = [ data.year, Z( data.month ), Z( data.day ), Z( data.hours - 1 ) ].join( '' );
 		} else
 		{
 			// Yesterday 2300~2359
 			const date = new Date( data.date.getTime() - 65 * 60 * 1000 );
 			dir = path.join( 'pics', [ date.getFullYear(), Z( date.getMonth() + 1 ), Z( date.getDate() ) ].join( '' ), '23' );
+			file =  [ date.getFullYear(), Z( date.getMonth() + 1 ), Z( date.getDate() ), '23' ].join( '' );
 		}
 	}
 	return LoadPicList( dir ).then( ( files ) =>
 	{
 		console.log( files );
 		const movie = new Movie();
-		return movie.create( files );
+		return movie.create( file, files );
 	} ).then( ( movie ) =>
 	{
 		if ( !movie ) { return Promise.resolve( '' ); }
